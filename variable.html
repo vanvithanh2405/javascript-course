@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Variable</title>
+</head>
+<body>
+
+  <h1>
+    Variable
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    // local variable
+    // global variable
+
+    /* var
+      - hoisting
+        - sẽ đẩy các khai báo biến (var), function lên trên đầu current scope
+        - nên vì thế chúng ta có thể access variable or execute function  trước khi khởi tạo.
+      - allow assign
+      - function scoped/ global scope
+    */
+
+    console.log('before message: ', message);
+    var message = 'tony'; // global variable
+    console.log('after message: ', message);
+
+    console.log(sum(1,2))
+    function sum(a, b) {
+      return a + b
+    }
+
+    /* let
+    - no hoisting
+      - can't access variable before initialize
+    - allow assign
+    - block scope
+    */
+    let firstName = 'tony';
+    firstName = 'nguyen';
+
+    if(true) {
+      let firstName = 'thanh'
+      console.log('block scope let: ', firstName);
+    }
+    console.log('let firstName: ', firstName);
+
+    /* const
+      - no hoisting
+      - no assign
+      - block scope
+    */
+    const lastName = 'tony';
+
+    if(true) {
+      let lastName = 'thanh'
+      console.log('block scope const: ', lastName);
+    }
+    console.log('const lastName: ', lastName);
+
+    // pure function: no side effect
+    // let abc = 10;
+    function getMonth(number){
+      let name = '';
+      // abc = abc + 10; // side effect
+      // if (number === 1) {
+      //   name = 'January'
+      // } else if (number === 2) {
+      //   name = 'February'
+      // } else if (number === 3) {
+      //   name = 'March'
+      // } else {
+      //   name = 'Other'
+      // }
+      // return name;
+
+      // best pratice replace to swith ... case statement
+      switch (number) {
+        case 1: {
+          name = 'January';
+          break;
+        }
+        case 2: {
+          name = 'February';
+          break;
+        }
+        default: {
+          name = 'Other';
+          break;
+        }
+      }
+      return name;
+    }
+    const nameMonth = getMonth(1);
+    console.log('nameMonth: ', nameMonth);
+
+    
+    /* hoisting
+      In JavaScript, a variable can be declared after it has been used.
+      Hoisting is JavaScript's default behavior of moving all declarations to the top of the current scope (to the top of the current script or the current function).
+    */
+    function caclulateSum() {
+      console.log('caclulateSum age: ', age)
+      var age = 18;
+    }
+    caclulateSum();
+
+    // IIFE
+    (function () {
+      var salary = '6000$';
+      console.log('My New Salary ' + salary);
+    })();
+
+
+
+    /*
+    // task hoisting
+    // Hoisting 1 with IIFE
+
+    var salary = '1000$';
+    (function () {
+      console.log('Original salary was ' + salary);
+      var salary = '6000$';
+      console.log('My New Salary ' + salary);
+    })();
+
+    // Hoisting 2 and Scope Chain with IIFE
+    var salary = '1000$';
+
+    (function () {
+      console.log('Original salary was ' + salary);
+      console.log('My New Salary ' + salary);
+    })();
+
+    // Hoisting 3
+    var x = 10;
+
+    test();
+
+    function test() {
+      function logX() {
+        console.log(x);
+      }
+      var x = 20;
+      logX();
+    }
+
+    console.log(x);
+    */
+
+  
+  </script>
+</body>
+
+</html>
+
+

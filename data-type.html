@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Type</title>
+</head>
+<body>
+
+  <h1>
+    Data Type
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+
+    /* Có 2 kiểu dữ liệu trong javascript
+      Primitive values (so sánh các giá trị vs nhau) (kiểu nguyên thủy)
+        Numbers - Integers, floats
+        Strings - Any data under single quote, double quote or backtick quote
+        Boolean - true or false value
+        Null - empty value or no value
+        Undefined - a declared variable without a value
+        Symbol (ES2015)
+      Non-primitive values (Object reference) (kiểu không nguyên thủy)
+        Objects
+        Function
+        Array
+      Note: You can’t define your own primitive types.
+    */
+
+    // compare by value: so sánh các giá trị vs nhau
+    const number1 = 1;
+    const number2 = 1;
+    console.log('compared by value: ', number1 === number2)
+
+    // compare by reference: so sánh các vùng nhớ vs nhau
+    const todos = [1,2,3];
+    const todos2 = [1,2,3];
+    console.log('compared by reference: ', todos === todos2)
+
+
+    /* Data type: String
+    A string in JavaScript must be surrounded by quotes.
+      Double quotes: "Hello".
+      Single quotes: 'Hello'.
+      Backticks: `Hello`.
+    */
+   const str = "hello 'word' ${number1}";
+   const str2 = 'hello \'word\' 2 ${number1}';
+   const str3 = `hello backtcks ${number1}`
+   console.log('Data type: string', {
+    str,
+    str2,
+    str3
+   })
+
+   // string concat
+   console.log("concat type 1:", str + ' ' + str2); // es5
+   console.log("concat type 2:", `${str} ${str2}`); // es6 // template string
+
+  </script>
+</body>
+
+</html>
+
+
