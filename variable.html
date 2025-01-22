@@ -121,17 +121,17 @@
 
     var salary = '1000$';
     (function () {
-      console.log('Original salary was ' + salary);
+      console.log('Original salary was ' + salary); //Undefined
       var salary = '6000$';
-      console.log('My New Salary ' + salary);
+      console.log('My New Salary ' + salary);My new salary 6000$
     })();
 
     // Hoisting 2 and Scope Chain with IIFE
     var salary = '1000$';
 
     (function () {
-      console.log('Original salary was ' + salary);
-      console.log('My New Salary ' + salary);
+      console.log('Original salary was ' + salary); Original salary was 1000$
+      console.log('My New Salary ' + salary); My New Salary was 1000$
     })();
 
     // Hoisting 3
@@ -141,13 +141,13 @@
 
     function test() {
       function logX() {
-        console.log(x);
+        console.log(x); x = 20
       }
       var x = 20;
       logX();
     }
 
-    console.log(x);
+    console.log(x);x = 10
     */
 
   
