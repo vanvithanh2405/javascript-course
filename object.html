@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Object</title>
+</head>
+<body>
+
+  <div>
+    <h1>Object</h1>
+  </div>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    // so sánh tham trị (compare by value) -> so sánh các giá trị với nhau
+    console.log('compare by value 1: ', 'tony' === 'tony');
+    console.log('compare by value 1: ', 20 === 10);
+    console.log('compare by value 1: ', 'tony20' === 'tony')
+
+    // so sánh tham chiếu (compare by reference) -> so sánh các vùng nhớ vs nhau
+    // non-primative: object, array, function ...
+    const firstName = 'tony'; // memory A
+    const object1 = {}; // memory B
+    const object2 = {}; // memory C
+    const object3 = object1;  // memory B
+
+    console.log('compare by reference 1: ', object1 === object2);
+    console.log('compare by reference 2: ', object1 === object3);
+  
+  </script>
+</body>
+
+</html>
+
+

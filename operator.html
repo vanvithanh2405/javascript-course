@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Operator</title>
+</head>
+<body>
+
+  <div>
+    <h1>Operator</h1>
+  </div>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+   // logical
+
+   // && -> xét theo vế (vế trái, vế phải)
+   // nếu vế trái là true, thì nó lấy giá trị vế phải
+   // nếu vế trái là false, thì nó lấy giá trị vế trái
+   console.log('&& 1: ', '' && 'tony'); // ''
+   console.log('&& 2: ', 'tony' && 'huy'); // huy
+   console.log('&& 3: ', true && 'tony'); // tony
+   console.log('&& 4: ', 'tony' && true); // true
+   console.log('&& 5: ', false && 'tony'); // false
+   console.log('&& 6: ', 'tony' && 'huy' && 'thanh'); // thanh
+
+   // || -> return firstly true
+   console.log('|| 1: ', 'tony' || 'huy' || 'thanh'); // tony
+   console.log('|| 1: ', '' || 'huy' || 'thanh'); // huy
+   console.log('|| 1: ', '' || '' || 'thanh'); // thanh
+
+   // !  or !!!!!!!
+   console.log('!!!!!: ', !!'tony'); // !false -> true
+   console.log('!!!!!: ', !!{}); // !false -> true
+   console.log('convert object to array', Object.keys({}).length > 0)
+
+   // operator: equality ==
+
+   // When comparing a number to a string, try to convert the string to a numeric value.
+    console.log('string and number: ', 1 == '1')
+
+    // If one of the operands is Boolean, convert the Boolean operand to 1 if it is true and +0 if it is false.
+    console.log('string and number: ', true == '1'); // Boolean(true) == '1' -> 1 == '1' -> 1 == 1=> true
+
+    // valueOf() or String() method
+    const testValueOf = new String('hello word');
+
+    console.log('valueOf(): ', typeof testValueOf, 'hello word' == testValueOf);
+
+    // test
+    onsole.log('string and number: ', 'pack' == true); // false
+    
+
+    // operator: ternary -> ? :
+    const abc = tony ? 'has data' : 'no data';
+
+    // ternary chains
+    function getScore(x){
+        return x === 10 ? 'xuat sac' 
+                : x >= 7 && x <= 9 ? 'tot' 
+                : x >= 4 && x <= 6 ? 'trung binh' 
+                : 'tệ'
+    }
+
+    // if else
+    function getScoreIfElse(x){
+        if (x === 10) {
+            return 'xuat sac'
+        } else if (x >= 7 && x <= 9) {
+            return 'tot'
+        } else if (x >= 4 && x <= 6) {
+            return 'trung binh'
+        } else {
+            return 'te'
+        }
+    }; 
+
+    // return early => clean code
+    function getScoreReturnEarly(x){
+        if (x === 10) {
+            return 'xuat sac'
+        } 
+        if (x >= 7 && x <= 9) {
+            return 'tot'
+        }
+        if (x >= 4 && x <= 6) {
+            return 'trung binh'
+        }
+       return 'te'
+    }; 
+
+  </script>
+</body>
+
+</html>
+
+

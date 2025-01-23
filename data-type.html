@@ -47,7 +47,7 @@
     */
    const str = "hello 'word' ${number1}";
    const str2 = 'hello \'word\' 2 ${number1}';
-   const str3 = `hello backtcks ${number1}`
+   const str3 = `hello backtcks ${number1}`; // template string
    console.log('Data type: string', {
     str,
     str2,
@@ -57,6 +57,83 @@
    // string concat
    console.log("concat type 1:", str + ' ' + str2); // es5
    console.log("concat type 2:", `${str} ${str2}`); // es6 // template string
+
+   // length -> get number letter
+   console.log("length : ", "tony "); 
+
+   // convert string to array
+   console.log('split: ', "tony".split());
+
+
+   // register
+   const bodyData = {
+    first_name: 'tony'.trim(),
+    last_name: '',
+    email: 'Tony@gmail.com'.trim().toLowerCase()
+   }
+
+   // user login
+   const first_name = 'tony'; // request API login -> BE response fail
+
+   // undefiend
+   function getInformationUser({
+    firstName, 
+    lastName, 
+    email, 
+    age, 
+    gender
+   }) {
+    console.log('getInformationUser: ', {
+      firstName,
+      lastName,
+      email, 
+      age,
+      gender
+    })
+   }
+   getInformationUser({
+    gender: 'nale',
+    age: 18,
+    firstName: 'tony',
+    lastName: 'nguyen',
+    email: 'tony@gmail.com'
+   });
+
+   // typeof operator -> check data type of variable
+   function sum() {
+    return 10
+   }
+   function calculate(paramA) {
+    if(typeof paramA === 'function') {
+      return paramA();
+    };
+    return 20;
+   }
+
+   console.log('demo typeof: ', calculate(sum));
+
+
+   // type coercion
+
+   // String
+   const isLogin = window.sessionStorage.getItem('isLogin');
+   console.log('convert value to String 1: ', String(true))
+   console.log('convert value to String 2: ', true.toString());
+   console.log('demo practice String convert: ', isLogin === true); 
+
+   /* numberic conversion
+    undefiend = NaN
+    null = 0
+    true = 1
+    false = 0
+    method: Number(xxx)
+   */
+
+   /* boolean conversation
+    null, undefiend, ' ', 0, NaN = false
+    other value = true
+    Method: Boolean(xxx)
+   */
 
   </script>
 </body>
