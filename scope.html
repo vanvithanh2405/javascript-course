@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scope</title>
+</head>
+<body>
+
+  <h1>
+    Scope
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    /* 3 Scope
+        - local/function scope -> function abc() {}, function xyz(){}
+            - var, let, const
+        - global scope -> file js
+            - var, let, const
+        - block scope -> statement if {} , switch {}
+            - let, const
+    */
+    var name = 'abc'; // global scope
+    function getPersons() {
+        var name = 'thanh'; // local/function scope
+        return `get person: ${name}`
+    }
+
+    console.log('demo function, block, global scope: ',  getPersons())
+
+    let color = 'red';
+
+    if(true) {
+        let color = 'yellow';
+        console.log('demo block inside ', color)
+    }
+
+    console.log('demo block outside', color)
+
+  </script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Closure</title>
+</head>
+<body>
+
+  <h1>
+    Closure
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    /* closure
+      inner function can access variable bên ngoài inner function 
+
+    */
+    function outerFunction() {
+      let counter = 0;
+      console.log('counter: ', counter)
+      function plusOne() {
+        counter = counter + 1;
+        return counter
+      };
+      function minusOne() {
+        counter = counter - 1;
+        return counter
+      };
+
+      return {
+        plusOne: plusOne(),
+        minusOne: minusOne()
+      };
+    }
+    const outer = outerFunction();
+
+    console.log(outer.plusOne)
+    console.log(outer.plusOne)
+    console.log(outer.minusOne)
+
+    function asssignMent() {
+       let message = '';
+       // call api -> show loading 
+       // finally -> hide loading
+       try {
+        console.log('try ')
+        var firstName = 'tony';
+        firstName = 'thanh';
+        message = 'success'
+      } catch (e) {
+        console.log('catch ', e)
+        message = 'failure'
+      } finally {
+        console.log('finally ')
+      }
+
+      return message
+    }
+    const isCheckMessage = asssignMent();
+    if(!isCheckMessage) {
+      // something
+    } else {
+      // something
+    }
+    console.log('isCheckMessage: ', isCheckMessage)
+
+  
+  </script>
+</body>
+
+</html>
+
+

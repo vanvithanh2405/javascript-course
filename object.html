@@ -26,6 +26,35 @@
 
     console.log('compare by reference 1: ', object1 === object2);
     console.log('compare by reference 2: ', object1 === object3);
+
+    // how to check object if empty = false and otherwise
+    // convert object to array: Object.keys(), Object.values(), Object.entities()
+
+    // create object
+    const user = {
+      firstName: 'tony',
+      lastName: 'nguyen',
+      "likes bird": true,
+      "brand name": true,
+      "age": 18,
+      company_name: 'amanotes',
+      "job-descrption": 'FE Developer'
+    }
+    // add property: vế trái là name property, vế phải là gán value for property
+    user.city = 'HCM';
+    user['zip-code'] = '090';
+    user['your email'] = 'abc@gmail.com';
+    console.log("user: ", user);
+
+    // access object
+    console.log('access way 1: ', user.firstName, user["firstName"]);
+    console.log('access way 2: ', user["likes bird"]); // if multi words
+
+    // access object with descturing // es6
+    // const firstNameUser = user.firstName;
+    // const lastNameUser = uiser.lastName
+    const { firstName: firstNameUser, lastName } = user; // descturing
+    console.log('access way 2: ', firstNameUser, lastName);
   
   </script>
 </body>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Function</title>
+</head>
+<body>
+
+  <h1>
+    Function
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    // function declaration -> The name of the function.
+    function calculateDeclartion() {
+
+    }
+    calculateDeclartion();
+
+    // function expression -> no name function
+    const expressFunc = function() {}; // traditional
+    // const expressFunc = () => {} // arrow function
+    expressFunc();
+
+    // pure function -> input -> output -> don't mutate variable
+    const members = [
+      {
+        id: 1,
+        title: 'tony',
+        age: 20,
+      },
+      {
+        id: 1,
+        title: 'huy',
+        age: 10,
+      }
+    ]
+
+    // pure function
+    function checkAdultPure(dataSource) {
+      const newNembers = dataSource.map(item => {
+        return {
+          ...item,
+          isAdult: item.age > 18 ? true : false
+        }
+      });
+      return newNembers
+    }
+    const membersPure = checkAdultPure(members);
+    console.log('pure function: ', {
+      memberDefault: members,
+      newMember: membersPure
+    })
+
+    // impure function -> input -> output -> mutate variable
+    function checkAdultImpure(dataSource) {
+      const newNembers = [];
+      dataSource.forEach(item => {
+        item.isAdult = item.age > 18 ? true : false
+        newNembers.push(item)
+      });
+      return newNembers
+    }
+    const membersImpure = checkAdultImpure(members);
+    console.log('impure function: ', {
+      memberDefault: members,
+      newMember: membersImpure
+    })
+
+    // pass params
+    function showMessageOrder(type, title, description) {
+      return {
+        type,
+        title,
+        description
+      }
+    }
+    const passByOrder = showMessageOrder('error', 'message thanh', 'description');
+    console.log('passByOrder function: ', passByOrder)
+
+    // pararms > 2 -> pass by {}
+    function showMessage({ type ='error', title, description }) {
+      return {
+        type,
+        title,
+        description
+      }
+    }
+    const passByObject = showMessage({
+      description: 'description',
+      title: 'message tony'
+    })
+    console.log('passByObject function: ', passByObject)
+
+  </script>
+</body>
+
+</html>
+
+
