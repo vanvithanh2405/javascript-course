@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Javascript DOM</title>
+
+  <link rel="stylesheet" href="./assets/css/index.css" />
+</head>
+<body>
+
+  <div>
+    <h1>Javascript DOM</h1>
+    <div id="div1" class="div1">div1</div>
+    <div id="div2" class="div2">div2</div>
+    <div id="div3" class="div3">div3</div>
+    <br />
+
+    <div id="todos">
+      <!-- <div class="title">tony</div> -->
+    </div>
+
+    <hr />
+    <h2>Demo List Users with DOM</h2>
+    <input id="nameUser" type="text" /> <button id="btnAddUser">Submit</button>
+
+    <ul id="issuesList" class="issue-list__list">
+      <!-- <li id="issue-list-item--8" class="issue-list-item">
+          <div class="list-item-header">
+              <div class="list-item-title">8</div>
+              <div id="issueStatus" class="list-item-status">
+                  new
+              </div>
+          </div>
+          <div class="list-item-content">
+              <h3 class="issue-name">quo adipisci enim quam ut ab</h3>
+              <div class="list-item-severity">low</div>
+              <div class="list-item-group-btn">
+                <button id="changeSttBtn" class="btn btn--close" onclick="closeIssue('8','new')">
+                    Close
+                </button>
+                <button class="btn btn--delete" onclick="deleteIssue('8')">Delete</button>
+              </div>
+          </div>
+      </li> -->
+    </ul>
+  </div>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    const div1 = document.getElementById('div1');
+    console.log('getElementById: ', div1)
+    div1.innerHTML = 'add inner html';
+    div1.setAttribute('data-area', 'tony');
+    div1.style.color = '#f00'
+
+    const divs = document.getElementsByClassName('div1');
+    console.log('getElementsByClassName: ', divs)
+
+    const tagHeading = document.getElementsByTagName('h1');
+    console.log('getElementsByTagName: ', tagHeading);
+
+    // demo add & remove todos
+    const todos = document.getElementById('todos');
+
+    const titleElement = document.createElement('div');
+    titleElement.setAttribute('class', 'title');
+    titleElement.innerHTML = 'tony';
+
+    todos.append(titleElement);
+
+    // Demo List Todos with DOM
+    const btnAddUser = document.getElementById('btnAddUser');
+    const nameUser = document.getElementById('nameUser');
+    const issuesList = document.getElementById('issuesList');
+    const users = [];
+    let name = '';
+
+    nameUser.addEventListener('change', function(e) {
+      name = e.target.value;
+    })
+
+    btnAddUser.addEventListener('click', function() {
+      const user = {
+        id: Date.now(),
+        title: name,
+        author: 'tony',
+        severity: 'low',
+        description: 'avbcacxascascas',
+        status: 'open'
+      }
+      users.push(user);
+      renderUserList(users);
+    })
+
+    function renderUserList(dataSource = []) {
+      issuesList.innerHTML = '';
+      dataSource.forEach((item, index) => {
+        const liElement = document.createElement('li');
+        liElement.setAttribute('id', `issue-list-item--${item.title}`);
+        liElement.setAttribute('class', `issue-list-item`);
+
+        const headerElement = document.createElement('div');
+        headerElement.setAttribute('class', 'list-item-header');
+
+        const titleElement =  document.createElement('div');
+        titleElement.setAttribute('class', 'list-item-title');
+        titleElement.innerHTML = item.title;
+
+        const statusElement =  document.createElement('div');
+        statusElement.setAttribute('id', 'issueStatus');
+        statusElement.setAttribute('class', 'list-item-status');
+        statusElement.innerHTML = item.status;
+
+        headerElement.append(titleElement);
+        headerElement.append(statusElement);
+
+        liElement.append(headerElement);
+
+        issuesList.append(liElement)
+      })
+    }
+
+    function deleteUser(userId) {
+      const newUsers = users.filter(item => item.id !== userId);
+      renderUserList(newUsers);
+    }
+
+    
+  </script>
+</body>
+
+</html>
+
+

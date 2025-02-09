@@ -12,6 +12,10 @@
 
   <!-- internal javascript -->
   <script type="text/javascript">
+    /* differenct between traditional & arrow function
+      - traditional: this, name function
+      - arrow: not this, not name function
+    */
     // so sánh tham trị (compare by value) -> so sánh các giá trị với nhau
     console.log('compare by value 1: ', 'tony' === 'tony');
     console.log('compare by value 1: ', 20 === 10);
@@ -38,8 +42,16 @@
       "brand name": true,
       "age": 18,
       company_name: 'amanotes',
-      "job-descrption": 'FE Developer'
+      "job-descrption": 'FE Developer',
+      getFullName: function() { // method object
+        console.log('getFullName: ', this)
+        return this.firstName + ' ' + this.lastName
+      },
+      getAge: () => { // arrow function
+        console.log('getAge: ', this)
+      }
     }
+    console.log('before delete operator: ', user)
     // add property: vế trái là name property, vế phải là gán value for property
     user.city = 'HCM';
     user['zip-code'] = '090';
@@ -55,7 +67,141 @@
     // const lastNameUser = uiser.lastName
     const { firstName: firstNameUser, lastName } = user; // descturing
     console.log('access way 2: ', firstNameUser, lastName);
-  
+
+    // method
+    console.log('method object getFullName: ', user.getFullName())
+    console.log('method object getAge: ', user.getAge())
+
+    // loop object: for ... in
+    for(const key in user) {
+      // get key
+      console.log('for ... in key: ', key)
+      // access values
+      console.log('for ... in value: ', user[key])
+    }
+
+    // loop array: for ... in, for ... of
+
+    // orderer object
+    const codes = {
+      "+49": "Germany",
+      "+41": "Switzerland",
+      "+44": 'VN',
+      "+1": 'USA'
+    }
+    for(const code in codes) {
+      console.log('orderer object: ', code)
+    }
+
+    // delete operator
+    delete user.getAge
+    console.log('delete operator: ', user)
+
+    // shallow clone/shallow copy & deep clone/deep copy
+    // shallow clone/shallow copy -> copy values of variable, but keep same reference
+    // deep clone/deep copy -> copy values of variable, but difference reference
+
+    const newUsers = { ...user }; // shallow copy/ shallow clone work fine with one object
+    delete newUsers.getFullName;
+    console.log('shallow copy/shallow clone: ', newUsers);
+
+    const todos = [
+      {
+        id: 1,
+        title: 'learn javascript'
+      },
+      {
+        id: 2,
+        title: 'learn angular'
+      }
+    ]
+    console.log('shallow copy/shallow clone before : ', todos);
+    // const newTodoso = [...todos]; // shallow copy/ shallow clone work fine with one object
+    const newTodoso = JSON.parse(JSON.stringify(todos)); // deep clone/deep copy
+    newTodoso[1].title = 'learn react'
+    console.log('shallow copy/shallow clone after: ', newTodoso);
+
+    /* compare object
+      - Referential equality (so sánh tham chiếu)
+      - Manual Comparison
+      - Shallow equality (so sánh nông)
+      - Deep equality (so sánh sâu)
+    */
+
+    const person1 = {
+      firstName: 'tony',
+      lastName: 'nguyen',
+      "likes bird": true,
+      company_name: 'amanotes',
+      address: {
+        ward: 13,
+        city: 'HCM'
+      }
+    }
+    const person2 = {
+      firstName: 'tony',
+      lastName: 'nguyen',
+      "likes bird": true,
+      company_name: 'amanotes',
+      address: {
+        ward: 13,
+        city: 'HCM'
+      }
+    }
+
+    function checkEqualShallow(object1, object2) {
+      const keys1 = Object.keys(object1);
+      const keys2 = Object.keys(object2);
+      console.log('checkEqualShallow key: ', keys1, keys2)
+      if(keys1.length !== keys2.length) {
+        return false
+      }
+
+      for(const key of keys1) {
+        console.log('for ... of key: ', {
+          key,
+          val1: object1[key],
+          val2: object2[key]
+        })
+        if(object1[key] !== object2[key]) {
+          return false
+        }
+      }
+
+      return true;
+    }
+    console.log('result checkEqualShallow: ', checkEqualShallow(person1, person2))
+
+    function isObject(value) {
+      return value !== null && typeof value === 'object'
+    };
+
+    function checkEqualDeep(object1, object2) {
+      const keys1 = Object.keys(object1);
+      const keys2 = Object.keys(object2);
+      console.log('checkEqualDeep key: ', keys1, keys2)
+      if(keys1.length !== keys2.length) {
+        return false;
+      }
+
+      for(const key of keys1) {
+        console.log('for ... of key checkEqualDeep: ', {
+          key,
+          val1: object1[key],
+          val2: object2[key]
+        })
+        const val1 = object1[key];
+        const val2 = object2[key];
+        const areObjects = isObject(val1) && isObject(val2)
+        if(areObjects && !checkEqualDeep(val1, val2) || !areObjects && val1 !== val2) {
+          return false
+        }
+      }
+
+      return true;
+    }
+    console.log('result checkEqualDeep: ', checkEqualDeep(person1, person2))
+
   </script>
 </body>
 
