@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Array</title>
+</head>
+<body>
+
+  <h1>
+    Array
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    // create  array
+    // const numbs = [1,2,3,4,5];
+    const numbs = [];
+    for(let i = 0; i < 10; i++) {
+        numbs.push(i);
+    }
+
+    // loop array
+    // for ... of -> return item of array
+    for(const numb of numbs) {
+        console.log('for ... of: ', numb)
+    }
+
+    // for ... in -> return index of array
+
+
+    /* push, pop
+        - Add & remove item to the end array
+        - Mutable array
+    */
+    const animals = [];
+    for(let i = 0; i < 10; i++) {
+        animals.push({
+            id: i,
+            name: `Animal ${i}`
+        });
+    }
+    const itemPoped =  animals.pop();
+
+    console.log('push & pop array: ', {itemPoped, animals})
+
+     /* shift, unshift
+        - Add & remove item to the begin array
+        - Mutable array
+    */
+
+    /* splice
+        The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements. 
+        Syntax:  array.splice(start, deleteCount, item1, item2, itemN)
+            start (require): The index at which to start changing the array.
+            deleteCount (optional): An integer indicating the number of elements in the array to remove from start.
+            item1, item2 … (optional): The elements to add to the array, beginning from start
+    */
+    const fruits = ['Banana', 'Oragne', 'Apple', 'Mango', 'Lemon'];
+    // fruits.splice(0, 2); // remove item
+    fruits.splice(1, 0, 'Dragon', 'Salt'); // add item
+
+    /* bai tap splice
+        const instrument = ['piano', 'organ', 'madarin', 'clown'];
+        1. output = ['piano', 'organ', 'madarin', 'drum', 'clown'];
+        2. output = ['piano', 'drum', 'clown'];
+    */
+    console.log('demo splice: ', fruits)
+
+    /* indexOf -> return idnex of array
+        The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+        If you need to find the index of a value, use Array.prototype.indexOf().
+            Syntax:  indexOf(searchElement, fromIndex)
+            searchElement (require): Element to locate in the array.
+            fromIndex (optional): The index to start the search at. 
+        Can't use with item object
+    */
+    console.log('demo indexOf: ', fruits.indexOf('Banana'))
+
+    // findIndex -> return index of array
+    const moviesFilm = [
+        { id: 1, title: 'nu hon bac ty' },
+        { id: 2, title: 'attack on titan' },
+    ]
+    const indexMovieTitan = moviesFilm.findIndex(movie => movie.id === 2);
+    if(indexMovieTitan !== -1) {
+        console.log('demo findIndex: ', indexMovieTitan)
+    }
+
+    // map -> create new array
+    const moviesAge = moviesFilm.map(movie => ({
+        ...movie,
+        age: 20
+    }))
+    console.log('demo map: ', {
+        moviesFilm,
+        moviesAge
+    })
+
+    // sort
+    const countries = [
+        { id: 1, title: 'VN' },
+        { id: 2, title: 'US' },
+        { id: 3, title: 'UK' },
+        { id: 4, title: 'JP' },
+        { id: 5, title: 'CN' },
+    ]
+    const countrySort1 = countries.sort(function(a, b) {
+        if(a.title.toLowerCase() > b.title.toLowerCase()) {
+            return 1;
+        }
+        if(a.title.toLowerCase() < b.title.toLowerCase()) {
+            return -1;
+        }
+        return 0;
+    });
+    console.log('demo sort 1: ', countrySort1)
+
+    /* bai tap sort
+    - change title = full name
+        VN -> Vietnam,
+        US -> United State,
+        UK -> United Kingdom,
+        JP -> Japanse,
+        CN -> China
+    - add length properties in country
+        title: 'Vietnam', length: 7
+    - sort ascesding by length
+    */
+
+    // reference item of array, shallow clone, deep clone
+    const books = [
+        { id: 1, author: 'tommy' },
+        { id: 2, author: 'huy' },
+        { id: 3, author: 'thanh' },
+    ];
+    const idfromBE = 2;
+    // prevent mutate default value -> clone new array
+    // const newBooks = [...books]; // shadow clone -> copy value, but same reference
+    const newBooks = JSON.parse(JSON.stringify(books)); // deep clone -> copy value, copy reference
+    const indexBook = newBooks.findIndex(book => book.id === idfromBE);
+    if(indexBook !== -1) {
+        newBooks[indexBook].author = 'Picaso'; // mutate direct default array
+    }
+    console.log('update books: ', {
+        books,
+        newBooks
+    })
+
+    // reduce
+    // covert array -> any type javascript
+    const numberReduce = [10, 30, 20, 50, 22, 21];
+    const resultReducerNumber = numberReduce.reduce((acc, currValue, currIndex, array) => {
+        console.log('numberReduce: ', {
+            acc, currValue, currIndex, array
+        })
+        // loop 1: acc = 0, currValue = 10 -> 10
+        // loop 2: acc = 10, currValue = 30 -> 40
+        // loop 3: acc = 40, currValue = 20 -> 60
+        // loop 4: acc = 60, currValue = 50 -> 110
+        // loop 5: acc = 110, currValue = 22 -> 132
+        // loop 6: acc = 132, currValue = 21 -> 153
+
+        return acc + currValue
+    }, 0)
+
+    /* covert array -> object javascript
+        {
+            10: true,
+            30: true,
+            20: true
+            50: true,
+            22: true,
+            21: false
+        }
+    */
+    const resultFullObjectTwo = numberReduce.reduce((acc, currValue) => {
+        console.log('resultFullObjectTwo: ', { acc, currValue })
+        acc[currValue] = currValue % 2 === 0;
+        return acc;
+    }, {})
+    console.log('resultFullObjectTwo reduce: ', resultFullObjectTwo);
+
+    // vidu total reduce
+    const carts = [
+        { id: 1, name: 'iphone', price: 200, quality: 2 },
+        { id: 2, name: 'samsung', price: 150, quality: 5 },
+        { id: 3, name: 'macbook', price: 332, quality: 3 }
+    ]
+    const totalPrice = carts.reduce((acc, curr) => {
+        // 1: 0 += 200 * 2 -> 400
+        // 2: 400 += 150 * 5 -> xxx
+        acc += curr.price * curr.quality;
+        return acc;
+    }, 0)
+    console.log('totalPrice reduce: ', totalPrice);
+
+    // baitap reduce
+
+    /* reduc1: sum total
+        const products = [
+            { name: "banana", quality: 10, price: 20 },
+            { name: "laptop", quality: 2, price: 15 },
+            { name: "iphone", quality: 10, price: 4 },
+        ];
+        output: 270
+    */
+
+
+    /* reduc2: count values in objects
+       const identifies = ["Truong", "Tony", "Hau", "Truong", "Truong", "Huy"];
+       output = {
+            "Truong": 3,
+            "Tony":  1,
+            "Hau": 1,
+            "Huy": 1
+       }
+    */
+
+    /* reduc3: group object by a property
+        const peoples = [
+            { name: "Truong", age: 20 },
+            { name: "Hau", age: 20 },
+            { name: "Tony", age: 32 },
+            { name: "Duy", age: 21 },
+            { name: "Duy", age: 20 },
+        ];
+        outputAge = {
+            20: [
+                { name: "Truong", age: 20 },
+                { name: "Hau", age: 20 },
+                { name: "Duy", age: 20 },
+            ],
+            21: {
+                { name: "Duy", age: 21 },
+            }
+            ....
+        }
+        outputName = {
+            "Truong": [
+                { name: "Truong", age: 20 },
+            ],
+            "Duy": {
+                { name: "Duy", age: 21 },
+                { name: "Duy", age: 20 },
+            }
+            ....
+        }
+    */
+
+    /* reduc4: reduce concat array
+        const friends = [
+            {
+                name: "Anna",
+                books: ["Bible", "Harry Potter"],
+                age: 21,
+            },
+            {
+                name: "Bob",
+                books: ["War and peace", "Romeo and Juliet", "Harry Potter"],
+                age: 26,
+            },
+            {
+                name: "Alice",
+                books: ["The Lord of the Rings", "The Shining"],
+                age: 18,
+            },
+        ];
+        output
+            [
+                'Bible', 'Harry Potter', 'War and peace', 'Romeo and Juliet', 'The Lord of the Rings', 'The Shining'
+            ]
+    */
+  
+  </script>
+</body>
+
+</html>
+
+
