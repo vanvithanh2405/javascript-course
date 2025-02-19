@@ -320,9 +320,19 @@
             { name: "Duy", age: 20 },
         ];
 
-        const groupByAge = peoples.reduce((acc, curr) => {
+        const handleGenericGroupBy = (arr, key) => {
+            return arr.reduce((acc, currObj) => {
+                const value = currObj[key]
+                if (!acc[value]) {
+                    acc[value] = []
+                }
+                acc[value].push(currObj)
+                return acc
+            }, {})
+        }
 
-        }, {})
+        console.log('groupByAge', handleGenericGroupBy(peoples, 'age'))
+        console.log('groupByName', handleGenericGroupBy(peoples, 'name'))
 
         /* reduc4: reduce concat array
             const friends = [
@@ -347,6 +357,26 @@
                     'Bible', 'Harry Potter', 'War and peace', 'Romeo and Juliet', 'The Lord of the Rings', 'The Shining'
                 ]
         */
+
+        const friends = [
+            {
+                name: "Anna",
+                books: ["Bible", "Harry Potter"],
+                age: 21,
+            },
+            {
+                name: "Bob",
+                books: ["War and peace", "Romeo and Juliet", "Harry Potter"],
+                age: 26,
+            },
+            {
+                name: "Alice",
+                books: ["The Lord of the Rings", "The Shining"],
+                age: 18,
+            },
+        ];
+
+
 
     </script>
 </body>
