@@ -73,7 +73,7 @@
         const instrument1 = [...instrument];
         const instrument2 = [...instrument];
         instrument1.splice(3, 0, 'drum');
-        instrument2.splice(1, 1);
+        instrument2.splice(1, 2, 'drum');
         console.log({ instrument1, instrument2 })
 
         /* indexOf -> return idnex of array
@@ -162,10 +162,8 @@
                 title: updateTitle,
                 length: updateTitle.length
             }
-        })
-
-        const sortNewCountriesArr = newCountriesArr.sort((a, b) => a.length > b.length ? 1 : -1);
-        console.log({ sortNewCountriesArr })
+        }).sort((a, b) => a.length > b.length ? 1 : -1);
+        console.log({ newCountriesArr })
 
         // reference item of array, shallow clone, deep clone
         const books = [
@@ -376,8 +374,12 @@
             },
         ];
 
+        const favBooks = friends.reduce((acc, curr) => {
+            acc = acc.concat(curr.books);
+            return acc;
+        }, [])
 
-
+        console.log('favBooks', favBooks)
     </script>
 </body>
 
