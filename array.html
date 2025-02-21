@@ -64,6 +64,17 @@
         1. output = ['piano', 'organ', 'madarin', 'drum', 'clown'];
         2. output = ['piano', 'drum', 'clown'];
     */
+
+    const intrusment = ['piano', 'organ', 'madarin', 'clown'];
+    const intrusment1 = [...intrusment];
+    const intrusment2 = [...intrusment];
+
+    intrusment1.splice(3,0,'drum');
+    intrusment2.splice (1,2 , 'drum');
+
+    console.log('intrusment1 :', intrusment1);
+    console.log('intrusment2 :', intrusment2);
+
     console.log('demo splice: ', fruits)
 
     /* indexOf -> return idnex of array
@@ -97,23 +108,23 @@
     })
 
     // sort
-    const countries = [
-        { id: 1, title: 'VN' },
-        { id: 2, title: 'US' },
-        { id: 3, title: 'UK' },
-        { id: 4, title: 'JP' },
-        { id: 5, title: 'CN' },
-    ]
-    const countrySort1 = countries.sort(function(a, b) {
-        if(a.title.toLowerCase() > b.title.toLowerCase()) {
-            return 1;
-        }
-        if(a.title.toLowerCase() < b.title.toLowerCase()) {
-            return -1;
-        }
-        return 0;
-    });
-    console.log('demo sort 1: ', countrySort1)
+    // const countries = [
+    //     { id: 1, title: 'VN' },
+    //     { id: 2, title: 'US' },
+    //     { id: 3, title: 'UK' },
+    //     { id: 4, title: 'JP' },
+    //     { id: 5, title: 'CN' },
+    // ]
+    // const countrySort1 = countries.sort(function(a, b) {
+    //     if(a.title.toLowerCase() > b.title.toLowerCase()) {
+    //         return 1;
+    //     }
+    //     if(a.title.toLowerCase() < b.title.toLowerCase()) {
+    //         return -1;
+    //     }
+    //     return 0;
+    // });
+    // console.log('demo sort 1: ', countrySort1)
 
     /* bai tap sort
     - change title = full name
@@ -126,6 +137,45 @@
         title: 'Vietnam', length: 7
     - sort ascesding by length
     */
+
+    const countries = [
+        { id: 1, title: 'VN' },
+        { id: 2, title: 'US' },
+        { id: 3, title: 'UK' },
+        { id: 4, title: 'JP' },
+        { id: 5, title: 'CN' },
+    ];
+
+    const countryMapping = [
+        'Vietnam',
+        'United State',
+        'United Kingdom',
+        'Japanese',
+        'China'
+    ]
+
+    const updateCountries = countries.map((country,index) =>{
+        const updateTitle = countryMapping[index] || country.title
+        return {
+            ...country,
+            title: updateTitle,
+            length: updateTitle.length
+        }
+        
+    }).sort((a,b)=> {
+        if (a.length > b.length){
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    });
+
+    console.log({updateCountries});
+   
+
+
+
 
     // reference item of array, shallow clone, deep clone
     const books = [
@@ -191,7 +241,7 @@
         // 2: 400 += 150 * 5 -> xxx
         acc += curr.price * curr.quality;
         return acc;
-    }, 0)
+    }, 0);
     console.log('totalPrice reduce: ', totalPrice);
 
     // baitap reduce
@@ -205,6 +255,16 @@
         output: 270
     */
 
+     const products = [
+            { name: "banana", quality: 10, price: 20 },
+            { name: "laptop", quality: 2, price: 15 },
+            { name: "iphone", quality: 10, price: 4 },
+        ];
+    const sumProducts = products.reduce((acc, curr) =>{
+        acc += curr.quality * curr.price;
+        return acc;
+    },0); 
+    console.log('sumProduct result', sumProducts);
 
     /* reduc2: count values in objects
        const identifies = ["Truong", "Tony", "Hau", "Truong", "Truong", "Huy"];
@@ -215,6 +275,20 @@
             "Huy": 1
        }
     */
+
+    const identifies = ["Truong", "Tony", "Hau", "Truong", "Truong", "Huy"];
+    const countIdentifies = identifies.reduce((acc, curr)=>{
+        if (!acc[curr]){
+            acc[curr] = 1;
+        }
+        else{
+            acc[curr] += 1;
+        }
+        return acc;
+    },{})
+
+    console.log('countIdentifiles:', countIdentifies);
+
 
     /* reduc3: group object by a property
         const peoples = [
@@ -246,6 +320,27 @@
             ....
         }
     */
+    const peoples = [
+            { name: "Truong", age: 20 },
+            { name: "Hau", age: 20 },
+            { name: "Tony", age: 32 },
+            { name: "Duy", age: 21 },
+            { name: "Duy", age: 20 },
+        ];
+    
+    const groupBy = (data ,key) =>{
+        return data.reduce((acc,curr)=>{
+            let value = curr[key];
+            if (!acc[value]) {
+                acc[value] = [];
+            }
+            acc[value].push(curr);
+            return acc;
+        },{})
+    };
+    console.log('group by Age',groupBy(peoples,'age'));
+    console.log('group by Name',groupBy(peoples,'name'));
+
 
     /* reduc4: reduce concat array
         const friends = [
@@ -270,7 +365,30 @@
                 'Bible', 'Harry Potter', 'War and peace', 'Romeo and Juliet', 'The Lord of the Rings', 'The Shining'
             ]
     */
-  
+   const friends = [
+            {
+                name: "Anna",
+                books: ["Bible", "Harry Potter"],
+                age: 21,
+            },
+            {
+                name: "Bob",
+                books: ["War and peace", "Romeo and Juliet", "Harry Potter"],
+                age: 26,
+            },
+            {
+                name: "Alice",
+                books: ["The Lord of the Rings", "The Shining"],
+                age: 18,
+            },
+        ];
+    const concatBooks = friends.reduce((acc,curr)=>{
+        acc = acc.concat(curr.books);
+        return acc;
+
+    },[]) 
+    console.log('Favorite Books: ',concatBooks);
+
   </script>
 </body>
 
