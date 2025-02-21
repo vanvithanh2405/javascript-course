@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+</head>
+<body>
+    <h1>function</h1>
+    
+    <script>
+        //function declaration -> function with name
+        function calculateDeclaration(){
+
+        }
+        
+        //function expression --> no name function
+        const expressFunction = function(){};   //traditional
+        //const expressFunc = () =>{}//arrow function
+
+        //pure function ->input -> output -> don't mutate variable
+        const members =[ 
+            {
+                id :1,
+                title:'tony',
+                age: 20
+            },
+            {
+                id :2,
+                title:'huy',
+                age: 10
+            }
+        ]
+
+        function checkAdult(dataSource){
+            const newMembers = dataSource.map(item =>{
+                return {
+                    ...item,
+                    isAdult :item.age > 18 ?true: false
+                }
+            });
+            return newMembers;
+        }
+
+    </script>
+</body>
+</html>
