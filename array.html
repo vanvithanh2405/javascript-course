@@ -146,16 +146,24 @@
         { id: 5, title: 'CN' },
     ];
 
-    const countryMapping = [
-        'Vietnam',
-        'United State',
-        'United Kingdom',
-        'Japanese',
-        'China'
-    ]
+    // const countryMapping = [
+    //     'Vietnam',
+    //     'United State',
+    //     'United Kingdom',
+    //     'Japanese',
+    //     'China'
+    // ]
+
+    const countryMapping = {
+        'VN': 'Vietnam',
+        'US': 'United State',
+        'UK': 'United Kingdom',
+        'CN': 'China',
+        'JP': 'Japanese'
+    }
 
     const updateCountries = countries.map((country,index) =>{
-        const updateTitle = countryMapping[index] || country.title
+        const updateTitle = countryMapping[country.title] 
         return {
             ...country,
             title: updateTitle,
@@ -330,7 +338,7 @@
     
     const groupBy = (data ,key) =>{
         return data.reduce((acc,curr)=>{
-            let value = curr[key];
+            const value = curr[key];
             if (!acc[value]) {
                 acc[value] = [];
             }
