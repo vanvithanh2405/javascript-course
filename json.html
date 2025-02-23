@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON</title>
+</head>
+<body>
+
+  <h1>
+    JSON
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+
+    /* JSON -> exchange data between client and server
+
+    JSON.stringify()
+      - convert type javascript -> string -> send on BE (if BE require string)
+    
+    JSON.parse()
+      - convert string to type javascript
+
+    Combine json string and json parser -> deep clone data
+
+    */
+    const user = {
+      title: 'xx',
+      id: 1,
+    };
+
+    // BE require -> send data with stringify
+    const bodyData = JSON.stringify(user);
+
+    const res = bodyData;
+
+    const parserData = JSON.parse(res)
+
+    console.log('JSON stringify: ', {
+      user,
+      bodyData,
+      res,
+      parserData,
+      title: parserData.title,
+      numberString: JSON.parse(JSON.stringify(1))
+    });
+    window.sessionStorage.setItem('numberRes', 1);
+
+    const numberRes = window.sessionStorage.getItem('numberRes')
+    console.log('session storage', {
+      numberRes,
+      equalStorage: JSON.parse(numberRes) === 1
+    });
+
+  </script>
+</body>
+
+</html>
+
+
