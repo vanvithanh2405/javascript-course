@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Storage</title>
+</head>
+<body>
+
+  <h1>
+    Web Storage
+  </h1>
+
+  <div id="container"></div>
+  <br />
+  <button id="btnAdd">Add</button>
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    const container = document.getElementById('container');
+
+    /* localstorage
+      Store data with no expiration date. 
+      Storage maximum 5MB.
+      Storaged from client side.
+      Data is json string 
+      The data will be deleted when the user clear history of browser.
+      Only save in its domain
+
+      session storage
+      It stores the data for only one session.
+      The data is deleted when the user closes the specific browser tab.
+      Storaged from client side.
+      Storage maximum 5MB.
+      Data is json string 
+      Only save in its domain
+
+      // Notes:
+      - convert to json string when save storage
+      - parser json data when get data from storage
+    */
+
+    // window.sessionStorage.setItem('todos', JSON.stringify(todos)); // add
+    // const todosStorage = JSON.parse(window.sessionStorage.getItem('todos')); // get
+    // window.localStorage.clear(); // clear all
+    // window.localStorage.removeItem('todos') ; remove specify item
+
+    let todos = [];
+
+    function renderTodos(dataSource = []) {
+      container.innerHTML = '';
+      console.log('renderTodos: ', dataSource)
+      dataSource.forEach((item, index) => {
+        const titleElement = document.createElement('div');
+        titleElement.innerHTML = index + 1 + ' ' + item.title;
+        
+        container.append(titleElement)
+      })
+    }
+
+    document.getElementById('btnAdd').addEventListener('click', () => {
+      const todo = {
+        id: Date.now(),
+        title: `Title ${Date.now()}`
+      }
+      todos.push(todo);
+      renderTodos(todos);
+
+      window.localStorage.setItem('todos', JSON.stringify(todos))
+    });
+  
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const data = JSON.parse(window.localStorage.getItem('todos'));
+      todos = data;
+      renderTodos(todos);
+    });
+    
+  </script>
+</body>
+
+</html>
+
+
