@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Destructuring</title>
+</head>
+<body>
+
+  <h1>
+    Destructuring
+  </h1>
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    const user = {
+      first_name: 'tony',
+      last_name: 'nguyen',
+      "temparu weather": 'rain',
+      book: {
+        title: 'react',
+        author: 'tony',
+        branch: {
+          name: 'ultimate',
+          price: 2000
+        }
+      }
+    }
+    const price = 10;
+    const { 
+      first_name, 
+      last_name,
+      book: {
+        branch: {
+          price: bookPrice, // rename default
+        },
+        branch
+      }
+    } = user;
+    const temparu = user['temparu weather'];
+
+    // rest operator: get all remain properties
+    // delete user.book; // remove properties
+    const { book, ...restUser } = user; // remove properties
+
+    // spread operator: get all properties instead list each other
+    function getUser(user) {
+      console.log('getUser: ', user)
+    }
+    // getUser({
+    //   first_name,
+    //   last_name,
+    //   book,
+    //   priceBook: book.branch.price
+    // })
+    getUser({ ...user }); //spread operator
+
+    console.log('destructuring: ', {
+      user,
+      first_name,
+      last_name,
+      temparu,
+      bookPrice,
+      branch,
+      restUser
+    })
+
+    // default value
+    function animal({ first_name, last_name, price = 0 } = {}) {
+      return `animal: ${first_name} ${last_name} ${price}`
+    }
+    console.log('animal: ', animal())
+
+    // array
+    const fruits = ['banana', 'orange', 'lemon'];
+    const [abc, , xyz] = fruits;
+
+    // swap item array
+    let source = 1;
+    let destination = 3;
+    [source, destination] = [destination, source]
+    console.log('swap item: ', source, destination)
+
+  </script>
+</body>
+
+</html>
+
+

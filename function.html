@@ -93,6 +93,162 @@
     })
     console.log('passByObject function: ', passByObject)
 
+
+    // callback function
+    function doHomeWork(subject, callback) {
+      console.log('do home work: ', subject);
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }
+
+    doHomeWork('math', () => {
+      console.log('finish home work')
+    })
+
+    /* arrow function
+      Arrow functions were introduced in ES6.
+      Arrow function doesn’t this.
+      Arrow function doesn’t bind.
+      Arrow function to anonymous function
+      () => { ... }
+    */
+
+    const sumabac = () => {};
+    // function sumabac() {}
+
+    const animal = {
+      name: 'bird',
+      color: 'red',
+      age: 10,
+      getName: function() {
+        return this;
+      },
+      getColor: () => {
+        return this
+      }
+    }
+    const objectAnimal = animal.getName();
+    const objectColorAnimal = animal.getColor();
+
+    console.log('arrow function: ', { objectAnimal, objectColorAnimal });
+
+    // arrow function: specify parameter/body
+    const plusSum = x => x;
+    const plusSum1 = (x, y) => x;
+    const plusSum2 = (x, y) => x + y;
+    const plusSum3 = (x, y) => {
+      if(x) {
+        return x
+      }
+      return x + y
+    };
+    // { x: xx, y: xxx }
+    const plusSum4 = (x, y) => ({ x, y })
+
+    console.log('arrow function: specify parameter/body: ', plusSum4(1, 2));
+
+    // curry function sum(1, 2)(2)(10) = 3 / closure function
+    const currySum = (x, a) => (y) => (b) => {
+      return x + y + a + b
+    }
+    console.log('currySum: ', currySum(1, 3)(2)(10))
+
+    function closureFunction(x) {
+      const numberOuter = x + 10;
+      return function(y) {
+        const numberInner1 = numberOuter + y
+        return numberInner1
+      }
+    }
+    console.log('closureFunction: ', closureFunction(10)(1));
+
+    // HOF higher order function
+    function applyTwice(func, arg) {
+      console.log('applyTwice: ', func, arg)
+      // func(arg) -> 15
+      // func(15) -> 20
+      // func(20) -> 25
+      return func(func(func(arg)));
+    }
+
+    function sumTotal(x) {
+      return x + 5;
+    }
+    console.log('HOF function: ', applyTwice(sumTotal, 10));
+
+    // baitap1 HOC
+    const animalWild = [
+      { name: 'kiki', species: 'dog' },
+      { name: 'lulu', species: 'dog' },
+      { name: 'meomeo', species: 'cat' },
+      { name: 'kuku', species: 'bird' }
+    ]
+
+    // filter by dog: cach 1
+    const dogs = [];
+    const cats = [];
+    const birds = [];
+    animalWild.forEach((animal, index) => {
+      if(animal.species === 'dog') {
+        dogs.push(animal)
+      }
+      if(animal.species === 'cat') {
+        cats.push(animal)
+      }
+      if(animal.species === 'bird') {
+        birds.push(animal)
+      }
+    })
+    console.log('filter dogs cach 1: ', { dogs, cats, birds })
+
+    // filter by dog: cach 2
+    const isDog = item => item.species === 'dog';
+    const isCat = item => item.species === 'cat';
+    const isBird = item => item.species === 'bird';
+
+    const dogsFiltered = animalWild.filter(isDog);
+    const catsFiltered = animalWild.filter(isCat)
+    const birdsFiltered = animalWild.filter(isBird)
+    console.log('filter dogs cach 2: ', { dogsFiltered, catsFiltered, birdsFiltered })
+
+    // bai tap 2 HOC:
+    /* ========== grade ======= 
+      Tìm thứ hạng trung bình của cả lớp 
+      Tìm thứ hạng trung bình của nam trong lớp 
+      Tìm thứ hạng trung bình của Nữ trong lớp 
+      Tìm thứ hạng cao nhất của Nam trong lớp 
+      Tìm thứ hạng cao nhất của Nữ trong lớp
+      Tìm thứ hạng thấp nhất của Nam trong lớp 
+      Tìm thứ hạng thấp nhất của Nữ trong lớp 
+      Tìm thứ hạng cao nhất của cả lớp 
+      Tìm thứ hạng thấp nhất của cả lớp
+    */
+    const grades = [
+      {name: 'John', grade: 8, sex: 'M'},
+      {name: 'Sarah', grade: 12, sex: 'F'},
+      {name: 'Bob', grade: 16, sex: 'M'},
+      {name: 'Johnny', grade: 2, sex: 'M'},
+      {name: 'Ethan', grade: 4, sex: 'M'},
+      {name: 'Paula', grade: 18, sex: 'F'},
+      {name: 'Donald', grade: 5, sex: 'M'},
+      {name: 'Jennifer', grade: 13, sex: 'F'},
+      {name: 'Courtney', grade: 15, sex: 'F'},
+      {name: 'Jane', grade: 9, sex: 'F'}
+    ];
+
+    const averageClass = (dataSource = []) => {
+      // const total = dataSource.reduce((acc, curr) => {
+      //   return acc + curr.grade;
+      // }, 0);
+      // const average = total / dataSource.length;
+      // return average;
+      return dataSource.reduce((acc, curr) => {
+        return acc + curr.grade;
+      }, 0) / dataSource.length;
+    };
+
+    console.log('averageClass: ', averageClass(grades))
   </script>
 </body>
 
