@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Class javscript</title>
+</head>
+<body>
+
+  <h1>
+    Class javscript
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    /* pattern: 
+    - singleton pattern
+    - apdater pattern
+    */
+    var number;
+    var sumArrow;
+    
+    console.log('before: ', number)
+    var number = 1;
+
+    console.log('after: ', number)
+
+    console.log('before sum: ', sum(1, 2))
+    function sum(x, y) {
+      return x + y
+    }
+
+    // arrow function: ko co hoisting
+    // console.log('before sumArrow: ', sumArrow(1, 2))
+    var sumArrow = (x, y) => {
+      return x + y
+    }
+
+    class Car { 
+      constructor(props) {
+        this.x = props.x,
+        this.y = props.y,
+        this.brand = props.brand,
+        this.year = props.year
+      }
+      getBrandName() {
+        return this.brand
+      }
+      getYear() {
+        return this.year
+      }
+    }
+
+    class Honda extends Car { 
+      constructor({ brand, year }) {
+       super({
+        brand,
+        year
+       })
+      }
+      automobile() {
+        console.log('automobile: ', this)
+        return true
+      }  
+    }
+
+    const car = new Car({
+      x: 5,
+      y: 30,
+      brand: 'bmw',
+      year: 1000
+    });
+
+    const civic = new Honda({ brand: 'civic', year: 2000 });
+
+    const city = new Honda({ brand: 'city', year: 2020 });
+    
+    console.log('class Shape: ', car.getYear())
+    console.log('class Honda civic: ', civic.automobile())
+    console.log('class Honda city: ', city.automobile()) 
+
+
+  
+  </script>
+</body>
+
+</html>
+
+

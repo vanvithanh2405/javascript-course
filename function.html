@@ -237,18 +237,53 @@
       {name: 'Jane', grade: 9, sex: 'F'}
     ];
 
-    const averageClass = (dataSource = []) => {
-      // const total = dataSource.reduce((acc, curr) => {
-      //   return acc + curr.grade;
-      // }, 0);
-      // const average = total / dataSource.length;
-      // return average;
+    const isMale = (grade) => grade.sex === 'M';
+    const isFemale = (grade) => grade.sex === 'F';
+    const getMales = (dataSource = []) => dataSource.filter(isMale);
+    const getFemales = (dataSource = []) => dataSource.filter(isFemale);
+
+    const averageCommon = (dataSource = []) => {
       return dataSource.reduce((acc, curr) => {
         return acc + curr.grade;
       }, 0) / dataSource.length;
     };
 
-    console.log('averageClass: ', averageClass(grades))
+    const maxGradesCommon = (dataSource = []) => {
+      // loop 0: {} -> undefiend ->  {name: 'John', grade: 8, sex: 'M'}
+      // loop 1: {name: 'John', grade: 8, sex: 'M'} -> 8 > 12 -> {name: 'Sarah', grade: 12, sex: 'F'},
+      // loop 2: {name: 'Sarah', grade: 12, sex: 'F'} -> 12 > 16 -> {name: 'Bob', grade: 16, sex: 'M'},
+      // loop 3: {name: 'Bob', grade: 16, sex: 'M'} -> 16 > 2 -> {name: 'Bob', grade: 16, sex: 'M'}
+      return dataSource.reduce((acc, curr) => {
+        return acc.grade > curr.grade ? acc : curr
+      }, {});
+    };
+
+    const minGradesCommon = (dataSource = []) => {
+      return dataSource.reduce((acc, curr) => {
+        return acc.grade < curr.grade ? acc : curr
+      }, {});
+    };
+
+    const averageClass = averageCommon(grades);
+    const averageMenGrades = averageCommon(getMales(grades));
+    const averageFemaleGrades = averageCommon(getFemales(grades));
+    const maxiumGrades = maxGradesCommon(grades).grade;
+    const miniumGrades = minGradesCommon(grades).grade;
+    const maxMenGrades = maxGradesCommon(getMales(grades)).grade;
+    const maxFemaleGrades = maxGradesCommon(getFemales(grades)).grade;
+    const minMenGrades = minGradesCommon(getMales(grades)).grade;
+    const minFemaleGrades = minGradesCommon(getFemales(grades)).grade;
+
+    console.log('averageClass: ', averageClass)
+    console.log('averageMenGrades: ', averageMenGrades)
+    console.log('averageFemaleGrades: ', averageFemaleGrades)
+    console.log('maxiumGrades: ', maxiumGrades)
+    console.log('miniumGrades: ', miniumGrades)
+    console.log('maxMenGrades: ', maxMenGrades)
+    console.log('maxFemaleGrades: ', maxFemaleGrades)
+    console.log('minMenGrades: ', minMenGrades)
+    console.log('minFemaleGrades: ', minFemaleGrades)
+    
   </script>
 </body>
 

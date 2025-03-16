@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stack & Queue</title>
+</head>
+<body>
+
+  <h1>
+    Stack & Queue
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    /* 
+    stack -> LIFO (last in first out) - chồng sách
+    queue -> FIFO (first in first out) - hàng đợi - xếp hàng mua vé
+    */
+
+    /* baitap
+    stack:
+      1/ Declare 1 class Stack with a variable items = [];
+      2/ Declare the methods available for our stack:
+        push (element): add a new item to the top.
+        pop (): removes the top item.
+        peek (): only return the top element.
+        isEmpty (): return true if the stack doesn’t contain any elements, false if the size bigger than 0.
+        clear (): removes all elements.
+        size() : return the number of elements that the stack contains.
+    queue:
+      1/ Declare 1 class Queue with a variable items = [];
+      2/ Declare the methods available for our queue:
+        enqueue (element): add a new item at the top of the queue.
+        dequeue (): removes the first element from the queue.
+        front (): returns the first element from the queue.
+        isEmpty (): return true if the queue doesn’t contain any elements, false if the size bigger than 0.
+        clear (): removes all elements.
+        size() : return the number of elements that the queue contains.
+    */
+    let stack = [];
+    let queue = [];
+    function addStack(number) {
+      stack.push(number)
+    }
+
+    function removeStack() {
+      stack.pop()
+    }
+
+    function peek() {
+      const topElement = stack.pop();
+      return topElement;
+    }
+
+    function isEmpty() {
+      return stack.length === 0;
+    }
+
+    function clear() {
+      stack = [];
+      return stack;
+    }
+
+    function size() {
+      return stack.length;
+    }
+
+    function print() {
+      return stack;
+    }
+
+    addStack(1);
+    addStack(30);
+    addStack(40);
+    addStack(59);
+
+    console.log('stack: ', print())
+    console.log('peek stack: ', peek())
+
+    /* ========== class ==========*/
+    class StackQueue {
+      constructor() {
+        this.items = [];
+      }
+      isEmpty() {
+        return this.items === 0;
+      }
+      clear() {
+        this.items = []
+      }
+      size() {
+        return this.items.length
+      }
+      print() {
+        return this.items
+      }
+    }
+
+    class Stack extends StackQueue {
+      constructor() {
+        super();
+      }
+      add(number) {
+        this.items.push(number)
+      }
+      remove() {
+        this.items.pop()
+      }
+    }
+    const stackClass = new Stack();
+    stackClass.add(2);
+    stackClass.add(240);
+    stackClass.add(123);
+    stackClass.add(642);
+    stackClass.remove();
+    console.log('stack class: ', {
+      stackClass,
+      print: stackClass.print(),
+      size: stackClass.size()
+    })
+
+    class Queue extends StackQueue {
+      constructor() {
+        super();
+      }
+      add(number) {
+        this.items.unshift(number)
+      }
+      remove() {
+        this.items.shift()
+      }
+    }
+    const queueClass = new Queue();
+    queueClass.add(2);
+    queueClass.add(240);
+    queueClass.add(123);
+    queueClass.add(642);
+    queueClass.remove();
+    console.log('queueClass class: ', {
+      queueClass,
+      print: queueClass.print(),
+      size: queueClass.size()
+    })
+  
+  
+  </script>
+</body>
+
+</html>
+
+
