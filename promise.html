@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promise</title>
+</head>
+<body>
+
+  <h1>
+    Promise
+  </h1>
+
+
+  <!-- internal javascript -->
+  <script type="text/javascript">
+    // const todos = [];
+    // const fetchTodos = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+
+    // fetchTodos
+    //   .then((data) => {
+    //     todos.push([...data]);
+    //     console.log('fetchTodos: ', todos)
+    //   })
+    //   .catch(err => {
+    //     console.log('fetchTOdo error: ', err)
+    //   })
+
+    const p1 = new Promise((resolve, reject) => {
+      resolve(10)
+    })
+
+    // call api
+
+    // show loading
+    p1.
+      then((res) => {
+        console.log('p1: ',res)
+      })
+      .catch(err => {
+        console.log('p1 reject: ', err)
+      })
+      .finally(() => {
+        // hide loading
+        console.log('p1 finally')
+      })
+
+      // promise all
+      const fetchTodo = fetch('https://jsonplaceholder.typicode.com/todos/1').then(json => json.json());
+      const fetchPost = fetch('https://jsonplaceholder.typicode.com/posts/1').then(json => json.json());
+      const fetchUser = fetch('https://jsonplaceholder.typicode.com/users/1').then(json => json.json());
+      const promiseRejected = new Promise((resolve, reject) =>
+        setTimeout(reject, 100, "foo"),
+      );
+      // sequence: tuần tự ->  trộn bánh kem -> đổ khung -> đưa lò nướng
+      // khi các hành động tiếp theo cần lấy result của hành động trước 
+      // A: 5s, B: 5s -> total wait: 10s
+
+      // promise hell
+      // fetchTodo
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     console.log('fetchTodo sequence: ', data)
+      //     fetchPost
+      //       .then(res => res.json())
+      //       .then(data => {
+      //         console.log('fetchPost sequence: ', data)
+      //         fetchUser
+      //           .then(res => res.json())
+      //           .then(data => console.log('fetchUser sequence: ', data))  
+      //       })  
+      //   })  
+      // parallel: song song -> chạy không chờ nhau, chạy đồng thời
+      // A: 5s, B: 5s -> total await: 5s
+      // fetchTodo
+      //   .then(res => res.json())
+      //   .then(data => console.log('fetchTodo parallel: ', data))  
+      // fetchPost
+      //   .then(res => res.json())
+      //   .then(data => console.log('fetchPost parallel: ', data))  
+      // fetchUser
+      //   .then(res => res.json())
+      //   .then(data => console.log('fetchUser parallel: ', data))  
+      
+      Promise.all([fetchTodo, fetchPost, fetchUser, promiseRejected])
+        .then(result => {
+          // console.log(result[0].json())
+          const todo = result[0];
+          const post = result[1];
+          const user = result[2];
+
+          console.log({ todo, post, user })
+        })
+        .catch(err => {
+          console.log("promise all error: ", err)
+        })
+
+      Promise.allSettled([fetchTodo, fetchPost, fetchUser, promiseRejected])
+        .then(result => {
+          console.log('promise allSettled: ', result)
+          const todo = result[0];
+          const post = result[1];
+          const user = result[2];
+
+          console.log({ todo, post, user })
+        })
+        .catch(err => {
+          console.log("promise allSettled error: ", err)
+        })
+
+        // Promise.resolve() -> return fullfiled
+        const pFullfiler = Promise.resolve(10);
+
+        // Promise.reject() -> return rejected
+        const pRejected = Promise.reject('abc');
+
+        console.log("full reject: ", {
+          pFullfiler,
+          pRejected
+        })
+
+  </script>
+</body>
+
+</html>
+
+
