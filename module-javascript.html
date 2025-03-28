@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Module javascript</title>
+</head>
+<body>
+
+  <h1>
+    Module javascript
+  </h1>
+
+
+  <script type="module">
+    import { THEME, sayHi as sidebarSayHi } from '../assets/js/sidebar.js';
+    import getProduct, { sayHi, thanhSum, thanhCaculateSquare } from '../assets/js/index.js';
+
+    console.log('theme: ', THEME)
+    console.log('sayHi: ', sayHi('tony'))    
+    console.log('sum: ', thanhSum(2, 3), thanhCaculateSquare({
+      x: 1,
+      y: 2,
+      z: 3
+    }))    
+    console.log('demo export default: ', getProduct())
+    console.log('demo import as : ', sidebarSayHi())
+  </script>
+</body>
+
+</html>
+
+
